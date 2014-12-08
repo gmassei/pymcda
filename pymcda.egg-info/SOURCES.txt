@@ -1,10 +1,15 @@
 setup.py
 pymcda/__init__.py
+pymcda/concordance.py
+pymcda/fuzzy.py
 pymcda/iomcda.py
 pymcda/normalize.py
+pymcda/promethee.py
+pymcda/topsis.py
 pymcda/weightedsum.py
 pymcda.egg-info/PKG-INFO
 pymcda.egg-info/SOURCES.txt
 pymcda.egg-info/dependency_links.txt
 pymcda.egg-info/not-zip-safe
+pymcda.egg-info/requires.txt
 pymcda.egg-info/top_level.txt
