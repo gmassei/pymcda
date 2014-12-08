@@ -8,4 +8,7 @@ setup(name='pymcda',
       author_email='g_massa@libero.it',
       license='GPL',
       packages=['pymcda'],
+      install_requires=['numpy',],
       zip_safe=False)
+##TODO: pandas packages
+##http://www.scotttorborg.com/python-packaging/minimal.html
