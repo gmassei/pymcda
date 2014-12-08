@@ -21,7 +21,7 @@
 #  MA 02110-1301, USA.
 #  
 #  
-
+import numpy as np
 
 def inputFromTXT(path):
 	"""load assesment matrix, with alternatives name in the col 1 and

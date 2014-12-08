@@ -4,7 +4,7 @@ import topsis
 import concordance
 import fuzzy
 import promethee
-
+import numpy as np
 try:
 	import numpy as np
 except ImportError:
