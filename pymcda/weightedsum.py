@@ -20,14 +20,14 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #  MA 02110-1301, USA.
 #  
-
+import os
 import normalize
 
 class weightedsum:
 	def __init__(self):
-		pass
+		self.path=os.getcwd()
 		
-	def elaborate(self,matrix,preference,criteria):
+	def elaborate(matrix,preference,criteria):
 		"""normalize matrix based on preference of criteria """
 		stdMatrix=[]
 		for c,p in zip(criteria,preference):
@@ -43,7 +43,7 @@ class weightedsum:
 		return stdMatrix.transpose()
 		
 		
-	def run(self,stdMatrix,weight):
+	def run(stdMatrix,weight):
 		"""process the matrix and get the ranking values for each alternative"""
 		weigtedMatrix=[[r*w for r,w in zip(row,weigth)] for row in strdMatrix]
 		rank=[sum(row) for row in weigtedMatrix]
