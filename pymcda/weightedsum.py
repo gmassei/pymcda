@@ -27,12 +27,12 @@ class weightedsum:
 	def __init__(self):
 		self.path=os.getcwd()
 		
-	def elaborate(matrix,preference,criteria):
+	def elaborate(self,matrix,preference,criteria):
 		"""normalize matrix based on preference of criteria """
 		stdMatrix=[]
 		for c,p in zip(criteria,preference):
 			if p=='g':
-				col=normalize.increas(matrix[c])
+				col=normalize.increase(matrix[c])
 			elif p=='c':
 				col=normalize.decrease(matrix[c])
 			elif p=='p':
@@ -43,7 +43,7 @@ class weightedsum:
 		return stdMatrix.transpose()
 		
 		
-	def run(stdMatrix,weight):
+	def run(self,stdMatrix,weight):
 		"""process the matrix and get the ranking values for each alternative"""
 		weigtedMatrix=[[r*w for r,w in zip(row,weigth)] for row in strdMatrix]
 		rank=[sum(row) for row in weigtedMatrix]

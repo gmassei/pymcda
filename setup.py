@@ -12,3 +12,4 @@ setup(name='pymcda',
       zip_safe=False)
 ##TODO: pandas packages
 ##http://www.scotttorborg.com/python-packaging/minimal.html
+##python setup.py install

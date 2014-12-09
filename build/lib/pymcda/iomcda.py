@@ -36,12 +36,13 @@ def listCriteria(matrix):
 	
 def listAlternatives(matrix):
 	"""return alternative names"""
-	alternatives=[row[0] for row in data]
+	alternatives=[row[0] for row in matrix]
 	return alternatives
 	
 def matrix2values(matrix):
 	"""return tha values of assesment matrix"""
 	values=[list(row)[1:] for row in matrix]
+	return values
 	
 def main():
 	print "input and output functions"
