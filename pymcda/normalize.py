@@ -23,27 +23,23 @@
 #  
 
 
-
-def __init__(self,criterion):
-	self.miN=min(criterion)
-	self.maX=max(criterion)
-	return miN,maX
-	
-def increase(self,criterion):
-	normCritrion=[((x-self.miN)/(self.maX-self.miN)) for x in criterion]
-	return normCritrion
-	
-def decrease(self,criterion):
-	normCritrion=[((self.maX-x)/(self.maX-self.miN)) for x in criterion]
-	return normCritrion
-	
-def regression(self,criterion,Xvalues, Yvalues, polyFittValue):
-	fit=np.polyfit(Xvalues, Yvalues, polyFittValue)
-	valuer = np.poly1d(fit)
-	normCritrion=[valuer(x) for x in criterion]
-	return normCritrion
+class normalize:
+	def __init__(self,criterion):
+		self.miN=min(criterion)
+		self.maX=max(criterion)
+		return miN,maX
 		
-
-
-if __name__ == '__main__':
-	main()
+	def increase(self,criterion):
+		normCritrion=[((x-self.miN)/(self.maX-self.miN)) for x in criterion]
+		return normCritrion
+		
+	def decrease(self,criterion):
+		normCritrion=[((self.maX-x)/(self.maX-self.miN)) for x in criterion]
+		return normCritrion
+		
+	def regression(self,criterion,Xvalues, Yvalues, polyFittValue):
+		fit=np.polyfit(Xvalues, Yvalues, polyFittValue)
+		valuer = np.poly1d(fit)
+		normCritrion=[valuer(x) for x in criterion]
+		return normCritrion
+		

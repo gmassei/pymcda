@@ -24,8 +24,8 @@ import os
 import normalize
 
 class weightedsum:
-	def __init__(self):
-		self.path=os.getcwd()
+	#def __init__(self):
+		#return self.path=os.getcwd()
 		
 	def elaborate(self,matrix,preference,criteria):
 		"""normalize matrix based on preference of criteria """
@@ -49,9 +49,3 @@ class weightedsum:
 		rank=[sum(row) for row in weigtedMatrix]
 		return rank
 	
-
-def main():
-	return 0
-
-if __name__ == '__main__':
-	main()

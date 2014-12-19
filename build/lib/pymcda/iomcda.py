@@ -44,9 +44,3 @@ def matrix2values(matrix):
 	values=[list(row)[1:] for row in matrix]
 	return values
 	
-def main():
-	print "input and output functions"
-	return 0
-
-if __name__ == '__main__':
-	main()
