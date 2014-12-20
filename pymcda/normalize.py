@@ -25,9 +25,8 @@
 
 class normalize:
 	def __init__(self,criterion):
-		miN=min(criterion)
-		maX=max(criterion)
-		return miN,maX
+		self.miN=min(criterion)
+		self.maX=max(criterion)
 		
 	def increase(self,criterion):
 		normCritrion=[((x-self.miN)/(self.maX-self.miN)) for x in criterion]
