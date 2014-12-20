@@ -29,12 +29,12 @@ def inputFromTXT(path):
 	matrix = np.genfromtxt(path, dtype=None, delimiter=';', names=True)
 	return matrix
 
-def listCriteria(matrix):
+def listCriteriaLabels(matrix):
 	"""return criteria names"""
 	criteria=list(matrix.dtype.names)
 	return criteria
 	
-def listAlternatives(matrix):
+def listAlternativesLabels(matrix):
 	"""return alternative names"""
 	alternatives=[row[0] for row in matrix]
 	return alternatives
