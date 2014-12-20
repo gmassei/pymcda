@@ -24,19 +24,19 @@ import os
 import normalize as norm
 
 class weightedsum:
-	#def __init__(self):
-		#return self.path=os.getcwd()
+	def __init__(self):
+		self.norm=normalize
 		
 	def elaborate(self,matrix,preference,criteria):
 		"""normalize matrix based on preference of criteria """
 		stdMatrix=[]
 		for c,p in zip(criteria,preference):
 			if p=='g':
-				col=norm.normalize.increase(matrix[c])
+				col=self.norm.increase(matrix[c])
 			elif p=='c':
-				col=norm.normalize.decrease(matrix[c])
+				col=self.norm.decrease(matrix[c])
 			elif p=='p':
-				col=norm.normalize.regression(matrix[c],Xvalues, Yvalues, polyFittValue)
+				col=self.norm.regression(matrix[c],Xvalues, Yvalues, polyFittValue)
 			else:
 				col=None
 			stdMatrix.append(col)
