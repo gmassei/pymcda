@@ -21,7 +21,7 @@
 #  MA 02110-1301, USA.
 #  
 import os
-import normalize
+import normalize as norm
 
 class weightedsum:
 	#def __init__(self):
@@ -32,11 +32,11 @@ class weightedsum:
 		stdMatrix=[]
 		for c,p in zip(criteria,preference):
 			if p=='g':
-				col=normalize.increase(matrix[c])
+				col=norm.normalize.increase(matrix[c])
 			elif p=='c':
-				col=normalize.decrease(matrix[c])
+				col=norm.normalize.decrease(matrix[c])
 			elif p=='p':
-				col=normalize.regression(matrix[c],Xvalues, Yvalues, polyFittValue)
+				col=norm.normalize.regression(matrix[c],Xvalues, Yvalues, polyFittValue)
 			else:
 				col=None
 			stdMatrix.append(col)
