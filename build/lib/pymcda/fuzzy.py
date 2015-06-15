@@ -21,31 +21,39 @@
 #  MA 02110-1301, USA.
 #  
 
-import normalize
 
 class fuzzy:
-	def __init__(self):
-		pass
+	def __init__(self,matrix):
+		self.miN=float(min(matrix))
+		self.maX=float(max(matrix))
 		
-	def elaborate(self,matrix,preference,criteria):
-		"""normalize matrix based on preference of criteria """
-		stdMatrix=[]
-		for c,p in zip(criteria,preference):
-			if p=='g':
-				col=normalize.increas(matrix[c])
-			elif p=='c':
-				col=normalize.decrease(matrix[c])
-			elif p=='p':
-				col=normalize.regression(matrix[c],Xvalues, Yvalues, polyFittValue)
-			else:
-				col=None
-			stdMatrix.append(col)
-		return stdMatrix.transpose()
+	def increase(self,criterion):
+		normCritrion=[float((x-self.miN)/(self.maX-self.miN)) for x in criterion]
+		return normCritrion
 		
+	def decrease(self,criterion):
+		normCritrion=[float((self.maX-x)/(self.maX-self.miN)) for x in criterion]
+		return normCritrion
 		
-	def run(self,stdMatrix,weight):
-		"""process the matrix and get the ranking values for each alternative"""
-		pass
+	def regression(self,criterion,Xvalues, Yvalues, polyFittValue):
+		fit=np.polyfit(Xvalues, Yvalues, polyFittValue)
+		valuer = np.poly1d(fit)
+		normCritrion=[valuer(x) for x in criterion]
+		return normCritrion
+		
+	def intersection(self,stdMatrix,linguisticMod):
+		"""intersect with AND/min operator all the alternatives \
+		 and get the ranking values for each alternative"""
+		weigtedMatrix=[[r**w for r,w in zip(row,linguisticMod)] for row in stdMatrix]
+		rank=[min(row) for row in weigtedMatrix]
+		return rank
+		
+	def union(self,stdMatrix,linguisticMod):
+		"""intersect with AND/min operator all the alternatives \
+		 and get the ranking values for each alternative"""
+		weigtedMatrix=[[r**w for r,w in zip(row,linguisticMod)] for row in stdMatrix]
+		rank=[min(row) for row in weigtedMatrix]
+		return rank
 	
 
 def main():

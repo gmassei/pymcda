@@ -21,31 +21,29 @@
 #  MA 02110-1301, USA.
 #  
 import os
-import normalize as norm
 
 class weightedsum:
-	def __init__(self):
-		self.norm=normalize
+	def __init__(self,matrix):
+		self.miN=float(min(matrix))
+		self.maX=float(max(matrix))
 		
-	def elaborate(self,matrix,preference,criteria):
-		"""normalize matrix based on preference of criteria """
-		stdMatrix=[]
-		for c,p in zip(criteria,preference):
-			if p=='g':
-				col=self.norm.increase(matrix[c])
-			elif p=='c':
-				col=self.norm.decrease(matrix[c])
-			elif p=='p':
-				col=self.norm.regression(matrix[c],Xvalues, Yvalues, polyFittValue)
-			else:
-				col=None
-			stdMatrix.append(col)
-		return stdMatrix.transpose()
+	def increase(self,criterion):
+		normCritrion=[float((x-self.miN)/(self.maX-self.miN)) for x in criterion]
+		return normCritrion
 		
+	def decrease(self,criterion):
+		normCritrion=[float((self.maX-x)/(self.maX-self.miN)) for x in criterion]
+		return normCritrion
+		
+	def regression(self,criterion,Xvalues, Yvalues, polyFittValue):
+		fit=np.polyfit(Xvalues, Yvalues, polyFittValue)
+		valuer = np.poly1d(fit)
+		normCritrion=[valuer(x) for x in criterion]
+		return normCritrion
 		
 	def run(self,stdMatrix,weight):
 		"""process the matrix and get the ranking values for each alternative"""
-		weigtedMatrix=[[r*w for r,w in zip(row,weigth)] for row in strdMatrix]
+		weigtedMatrix=[[r*w for r,w in zip(row,weight)] for row in stdMatrix]
 		rank=[sum(row) for row in weigtedMatrix]
 		return rank
 	

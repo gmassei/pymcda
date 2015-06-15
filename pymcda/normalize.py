@@ -25,15 +25,21 @@
 
 class normalize:
 	def __init__(self,criterion):
-		self.miN=min(criterion)
-		self.maX=max(criterion)
+		self.miN=[min(r) for r in matrix] #min values vector
+		self.maX=[max(r) for r in matrix] ##man values vector
 		
 	def increase(self,criterion):
-		normCritrion=[((x-self.miN)/(self.maX-self.miN)) for x in criterion]
+		"""normalize all values in a list with linear increas/gain function"""
+		miN=min(criterion)
+		maX=max(criterion)
+		normCritrion=[float((x-miN)/(maX-miN)) for x in criterion]
 		return normCritrion
 		
 	def decrease(self,criterion):
-		normCritrion=[((self.maX-x)/(self.maX-self.miN)) for x in criterion]
+		"""normalize all values in a list with linear decreas/cost function"""
+		miN=min(criterion)
+		maX=max(criterion)
+		normCritrion=[float((maX-x)/(maX-miN)) for x in criterion]
 		return normCritrion
 		
 	def regression(self,criterion,Xvalues, Yvalues, polyFittValue):

@@ -27,28 +27,74 @@ class concordance:
 	def __init__(self):
 		pass
 		
-	def elaborate(self,matrix,preference,criteria):
-		"""normalize matrix based on preference of criteria """
-		stdMatrix=[]
-		for c,p in zip(criteria,preference):
-			if p=='g':
-				col=normalize.increas(matrix[c])
-			elif p=='c':
-				col=normalize.decrease(matrix[c])
-			elif p=='p':
-				col=normalize.regression(matrix[c],Xvalues, Yvalues, polyFittValue)
-			else:
-				col=None
-			stdMatrix.append(col)
-		return stdMatrix.transpose()
+	def increase(self,criterion):
+		"""normalize criterion withe gain/increase function"""
+		miN=min(criterion)
+		maX=max(criterion)
+		normCritrion=[float((x-miN)/(maX-miN)) for x in criterion]
+		return normCritrion
+		
+	def decrease(self,criterion):
+		"""normalize criterion withe cost/decrease function"""
+		miN=min(criterion)
+		maX=max(criterion)
+		normCritrion=[float((maX-x)/(maX-miN)) for x in criterion]
+		return normCritrion
 		
 		
-	def run(self,stdMatrix,weight):
-		"""process the matrix and get the ranking values for each alternative"""
-		pass
 	
+	def concordanceMatrix(self, matrix,weight):
+		concordance=[]
+		for row1 in matrix:
+			crow=[]
+			for row2 in matrix:
+				value=0
+				for r1,r2,w in zip(row1,row2,weight):
+					if r1>r2:
+						value=value+w
+				crow.append(value)
+			concordance.append(crow)
+		return concordance
+
+	def discordanceMatrix(self, matrix):
+		discordance=[]
+		for row1 in matrix:
+			drow=[]
+			value=0
+			for row2 in matrix:
+				for r1,r2 in zip(row1,row2):
+					if (r1-r2)>value:
+						value=(r1-r2)
+					else:
+						value=value
+				drow.append(value)
+			discordance.append(drow)
+		return discordance
+		
+	
+	def concordanceIndex(self,concordance):
+		concIndx=[]
+		concordance=np.array(concordance, dtype = 'float32')
+		for i in range(len(concordance)):
+			row=concordance[i]
+			col=concordance[:,i]
+			value=sum(row)-sum(col)
+			concIndx.append(value)
+		return concIndx
+		
+	def discordanceIndex(self,discordance):
+		discIndx=[]
+		discordance=np.array(discordance, dtype = 'float32')
+		for i in range(len(discordance[0])):
+			row=discordance[i]
+			col=discordance[:,i]
+			value=sum(row)-sum(col)
+			discIndx.append(value)
+		return discIndx
+
 
 def main():
+	print "concordance mcda model"
 	return 0
 
 if __name__ == '__main__':

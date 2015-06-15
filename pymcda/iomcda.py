@@ -20,27 +20,41 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #  MA 02110-1301, USA.
 #  
-#  
-import numpy as np
+# 
+try: 
+	import numpy as np
+except ImportError:
+	print "numpy missing!"
+	
 
-def inputFromTXT(path):
-	"""load assesment matrix, with alternatives name in the col 1 and
-	critera names in row 1"""
-	matrix = np.genfromtxt(path, dtype=None, delimiter=';', names=True)
+def inputFromTxt(path,idCol=0):
+	"""Create records. Load assesment matrix, with alternatives name in 
+	the col 1 and critera names in row 1"""
+	SI = np.genfromtxt(path, dtype=None, delimiter=';', names=True)
+	SI={'alternatives':[row[idCol] for row in SI],'criteria':list(SI.dtype.names),'preference':[]'matrix':[list(row)[1:] for row in SI]}
+	return SI
+
+def getMatrix(alternatives,critaria, matrix ):
+	SI={'alternatives':alternatives,'critaria':critaria,'matrix':matrix}
 	return matrix
 
-def listCriteriaLabels(matrix):
+def getCriteriaLabels(SI):
 	"""return criteria names"""
-	criteria=list(matrix.dtype.names)
-	return criteria
+	lblCriteria=matrix['critaria']
+	return lblCriteria
 	
-def listAlternativesLabels(matrix):
+def getAlternativesLabels(SI,idCol=0):
 	"""return alternative names"""
-	alternatives=[row[0] for row in matrix]
-	return alternatives
+	lblAlternatives=SI['alternatives']
+	return lblAlternatives
 	
-def matrix2values(matrix):
+def matrix2values(SI):
 	"""return tha values of assesment matrix"""
-	values=[list(row)[1:] for row in matrix]
-	return values
+	matrix=SI['matrix']
+	return matrix
+	
+def extractColumn(SI,colId):
+	"""extract a single column based it's index"""
+	column=[row[colId] for row in SI['matrix']]
+	return np.array(column)
 	
