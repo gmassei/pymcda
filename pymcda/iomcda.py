@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#  weightedsum.py
+#  iomcda.py
 #  
 #  Copyright 2014 gianluca <g_massa@libero.it>
 #  
@@ -31,7 +31,7 @@ def inputFromTxt(path,idCol=0):
 	"""Create records. Load assesment matrix, with alternatives name in 
 	the col 1 and critera names in row 1"""
 	SI = np.genfromtxt(path, dtype=None, delimiter=';', names=True)
-	SI={'alternatives':[row[idCol] for row in SI],'criteria':list(SI.dtype.names),'preference':[]'matrix':[list(row)[1:] for row in SI]}
+	SI={'alternatives':[row[idCol] for row in SI],'criteria':list(SI.dtype.names),'preference':[],'matrix':[list(row)[1:] for row in SI]}
 	return SI
 
 def getMatrix(alternatives,critaria, matrix ):
